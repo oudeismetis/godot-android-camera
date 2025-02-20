@@ -6,7 +6,7 @@ func _ready():
 	# https://github.com/Lamelynx/GodotGetImagePlugin-Android
 	if Engine.has_singleton("GodotGetImage"):
 		imagePlugin = Engine.get_singleton("GodotGetImage")
-		imagePlugin.connect("image_request_completed", self, "_set_image")
+		imagePlugin.connect("image_request_completed", Callable(self, "_set_image"))
 		var options = {
 			"image_format": "jpg",
 			"image_width": 50,
@@ -26,13 +26,13 @@ func _set_image(dict):
 		var currentImage = Image.new()
 		currentImage.load_jpg_from_buffer(image)
 		print("Loading Image...")
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		var texture = ImageTexture.new()
-		texture.create_from_image(currentImage, 0)
+		texture.create_from_image(currentImage) #,0
 		$TextureRect.texture = texture
 
 func _get_camera():
 	if imagePlugin:
 		imagePlugin.getCameraImage()
 	else:
-		print("Camera image cannot be take")
+		print("Camera3D image cannot be taken")

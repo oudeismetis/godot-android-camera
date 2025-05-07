@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwm5s8dk3e0e3"]
+[gd_scene load_steps=4 format=3 uid="uid://dwm5s8dk3e0e3"]
 
-[ext_resource type="Script" path="res://DemoGetImageController.gd" id="1"]
-[ext_resource type="Script" path="res://Button2.gd" id="2"]
+[ext_resource type="Script" uid="uid://dolmpfak42any" path="res://DemoGetImageController.gd" id="1"]
+[ext_resource type="Script" uid="uid://dfpay7q8gfg0l" path="res://Button2.gd" id="2"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_lngfa"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1")
@@ -18,7 +20,7 @@ offset_left = 521.0
 offset_top = 23.0
 offset_right = 989.0
 offset_bottom = 200.0
-text = "Get Camera3D"
+text = "Get Camera"
 script = ExtResource("2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -28,6 +30,14 @@ offset_right = 967.0
 offset_bottom = 583.0
 expand_mode = 1
 stretch_mode = 6
+
+[node name="CamFeed" type="TextureRect" parent="."]
+offset_left = 32.0
+offset_top = 618.0
+offset_right = 994.0
+offset_bottom = 1087.0
+texture = SubResource("CameraTexture_lngfa")
+expand_mode = 1
 
 [connection signal="button_up" from="Button" to="." method="_get_gallery_selection"]
 [connection signal="button_up" from="Button2" to="." method="_get_camera"]

@@ -12,8 +12,12 @@ config_version=5
 
 config/name="AndroidCameraTest"
 run/main_scene="res://AndroidCameraTest.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res://addons/GodotGetImage/plugin.cfg")
 
 [gdnative]
 

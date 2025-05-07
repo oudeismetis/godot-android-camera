@@ -23,8 +23,8 @@ func _ready():
 		if not camera_extension.permission_granted():
 			camera_extension.permission_result.connect(_on_permission_result)
 			print("calling for permissions")
-			# camera_extension.request_permission()
-			OS.request_permissions()
+			camera_extension.request_permission()
+			# OS.request_permissions()
 		else:
 			print("permissions already granted")
 			cameraPlugin = true
@@ -74,3 +74,23 @@ func _run_camera_logic():
 	var camera_texture: CameraTexture = CameraTexture.new()
 	camera_texture.camera_feed_id = feed.get_id()
 	cam_feed.texture = camera_texture
+	
+	# Above works
+	# await get_tree().process_frame
+	await get_tree().create_timer(1).timeout
+	# camera_texture.changed()
+	# cam_feed.texture.changed()
+	var image = camera_texture.get_image()
+	var image_texture = ImageTexture.create_from_image(image)
+	my_texture.texture = image_texture
+	
+	# Turn off the feed
+	cam_feed.texture = null
+	feed = null
+	# These will crash things...
+	# await get_tree().create_timer(3).timeout
+	# feed.feed_is_active = false
+	# CameraServer.remove_feed(feed)
+	# CameraServer.free()
+	# camera_texture.free()
+	# feed.free()
